@@ -11,11 +11,19 @@
     <title>Document</title>
   </head>
   <body>
-    <button onClick="getRandomImage()">Click for a random image</button><br />
+    <button onclick="getRandomImage()">Click for a random image</button>
     <br />
     <img
       id="dogImage"
-      src="https://dog.ceo/img/dog-api-logo.svg" />
+      src="https://dog.ceo/img/dog-api-logo.svg"
+      width="300" />
+    <br /><br />
+
+    <!-- Breed Selection -->
+    <select id="breedSelect">
+      <option value="">Select a breed</option>
+    </select>
+    <button onclick="getBreedImage()">Get Breed Image</button>
   </body>
   <script src="script.js"></script>
 </html>
