@@ -1,31 +1,28 @@
-document.addEventListener("click", function (event) {
-  // Checking if the button was clicked
-  if (!event.target.matches("#button")) return;
-
-  /*
-    Here we send a request to the Joke API
-    Then process the response into JSON
-    Then pass the data to our renderJoke function.
-    */
-  fetch("https://official-joke-api.appspot.com/random_joke")
-    .then((response) => response.json())
-    .then((data) => renderJoke(data))
-    .catch(() => renderError());
-});
-
-function renderJoke(data) {
-  // Get text elements
-  const setup = document.getElementById("setup");
-  const punchline = document.getElementById("punchline");
-  const error = document.getElementById("error");
-
-  // Hide error and render jokes
-  error.innerHTML = "";
-  setup.innerHTML = data.setup;
-  punchline.innerHTML = data.punchline;
+// function to perform a get request
+function httpGet(theUrl) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", theUrl, false); // false for synchronous request
+  xmlHttp.send(null);
+  return xmlHttp.responseText;
 }
 
-function renderError() {
-  const error = document.getElementById("error");
-  error.innerHTML = "Whoops, something went wrong. Please try again later!";
+// function to get a random image
+function getRandomImage() {
+  // get the json from the server
+  var json = httpGet("https://dog.ceo/api/breeds/image/random");
+  console.log(json);
+
+  // decode the json into an array
+  var array = JSON.parse(json);
+  console.log(array);
+
+  // get the image url from the array
+  var url = array.message;
+  console.log(url);
+
+  // get the image object
+  var image = document.getElementById("dogImage");
+
+  // set the src of the image object
+  image.src = url;
 }
